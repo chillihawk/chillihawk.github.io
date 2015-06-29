@@ -1,3 +1,0 @@
-User-agent: *
-Sitemap: http://markstownsend.com/sitemap.xml
-Disallow: /ghost/
