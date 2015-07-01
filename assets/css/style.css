@@ -456,7 +456,7 @@ HR{width:200px;height:3px;border:none;background-color:#eaeaea}
 .post .post-header HR{margin:15px auto;width:70px;height:2px;border:none;background-color:#CCCCCC}
 .post .post-excerpt,.post .post-content{line-height:1.6}
 .post .post-excerpt P{margin:0}
-.post .post-content IMG{margin-left:-50px;max-width:650px}
+.post .post-content IMG{display:block;margin-right:auto;margin-left:auto;max-width:80%}
 .post .post-footer{margin-top:20px;padding-top:25px;border-top:1px solid #EAEAEA}
 .post .post-footer .post-author{overflow:hidden;padding:15px;border:1px solid #F1F1F1;background-color:#F7F7F7}
 .post .post-footer .post-author .post-author-avatar{float:left;margin-left:0;width:18%;border:5px solid #DDDDDD;border-radius:100%}
@@ -501,7 +501,7 @@ HR{width:200px;height:3px;border:none;background-color:#eaeaea}
 @media screen and (max-width: 960px){
 BODY{margin:3% 2%;background:#fff}
 #container{margin:0 auto;padding:0;width:98%;background-color:#fff}
-.post IMG{display:block;margin-right:auto;margin-left:auto;max-width:100%;width:100%}
+.post IMG{display:block;margin-right:auto;margin-left:auto}
 }
 @media screen and (max-width: 480px){
 .header{padding:45px 1px 40px;background-color:#CCCCCC;background-position:center center;background-size:auto;color:#fff;text-align:center;text-transform:uppercase}
