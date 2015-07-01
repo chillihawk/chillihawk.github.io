@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Ghost on Github</title>	
+
+	<meta name="description" content="How to host a Ghost blog on Github Pages for free.">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="Ghost on Github"/>
+    <meta name="twitter:description" content="How to host a Ghost blog on Github Pages for free."/>
+    <meta name="twitter:site" content="@markstownsend"/>
+	<meta name="twitter:image" content="http://markstownsend.com/assets/images/tos_banner.jpg"/>
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Ghost on Github">
+    <meta property="og:description" content="How to host a Ghost blog on Github Pages for free.">
+	<meta name="og:image" content="http://markstownsend.com/assets/images/tos_banner.jpg"/>
+
+    <link rel="stylesheet" href="/assets/css/style.css"/>
+
+    <link rel="canonical" href="index.html" />
+    
+    <meta property="og:site_name" content="Technology-on-Sea" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Ghost on Github" />
+    <meta property="og:description" content="How to host a Ghost blog on Github Pages for free." />
+    <meta property="og:url" content="/hosting-a-ghost-blog-on-github-for-free/" />
+    <meta property="og:image" content="/content/images/2015/07/ghostplusgithub.png" />
+    <meta property="article:published_time" content="2015-07-01T07:56:23.168Z" />
+    <meta property="article:modified_time" content="2015-07-01T08:22:48.974Z" />
+    <meta property="article:tag" content="Ghost" />
+    <meta property="article:tag" content="Github Pages" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ghost on Github" />
+    <meta name="twitter:description" content="How to host a Ghost blog on Github Pages for free." />
+    <meta name="twitter:url" content="/hosting-a-ghost-blog-on-github-for-free/" />
+    <meta name="twitter:image:src" content="/content/images/2015/07/ghostplusgithub.png" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "Technology-on-Sea",
+    "author": {
+        "@type": "Person",
+        "name": "Mark Townsend",
+        "image": "//www.gravatar.com/avatar/dcdd9078ca819e49a4c26fed702a440e?s=250&d=mm&r=x",
+        "url": "/author/mark",
+        "sameAs": null,
+        "description": null
+    },
+    "headline": "Ghost on Github",
+    "url": "/hosting-a-ghost-blog-on-github-for-free/",
+    "datePublished": "2015-07-01T07:56:23.168Z",
+    "dateModified": "2015-07-01T08:22:48.974Z",
+    "image": "/content/images/2015/07/ghostplusgithub.png",
+    "keywords": "Ghost, Github Pages",
+    "description": "How to host a Ghost blog on Github Pages for free."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.6" />
+    <link rel="alternate" type="application/rss+xml" title="Technology-on-Sea" href="../rss/index.html" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-64603532-1', 'auto');
+  ga('send', 'pageview');
+
+</script>	
+</head>
+<body class="post-template tag-ghost-tag tag-github-pages">
+	
+<main id="container" role="main">
+	<header class="header" role="banner" style="background-image: url(/assets/images/tos_banner.jpg);">
+	<h1 class="blog-title">
+		<a href="../index.html">Technology-on-Sea</a>
+	</h1>
+	<div class="blog-description">Thoughts about technology from the South Coast.</div>
+</header>
+	<nav class="menu" role="navigation">
+	<a href="../index.html">Home</a>
+	<span class="delimiter">&#8226;</span>
+	<a href="../about/index.html">About</a>
+</nav>
+	<section class="post-full">
+		<article itemscope itemtype="http://schema.org/BlogPosting" role="article" class="post tag-ghost-tag tag-github-pages">
+			<header class="post-header">        		
+    			<h2 itemprop="name headline" class="post-title">
+    				<a href="index.html" itemprop="url">Hosting a Ghost blog on Github for free!</a>
+    			</h2>
+    			<div class="post-meta">
+        			<time datetime="2015-07-01" itemprop="datePublished">July 01, 2015</time>
+    				<span class="delimiter">&#8226;</span> 
+<a href="../tag/ghost-tag/index.html">Ghost</a>, <a href="../tag/github-pages/index.html">Github Pages</a>        		</div>
+        		<hr>
+    		</header>
+    		<section itemprop="articleBody" class="post-content">
+    			<p>What you are looking at is a blog post written on the <a href="https://ghost.org/">Ghost</a> blogging platform then turned into static html and pushed in to a <a href="https://github.com/">Github</a> repo. <br />
+<img src="../content/images/2015/07/ghostplusgithub-1.png" alt="" />
+Sounds like a lot of hassle, why bother?  Well, because it's free as in lunch.  Read on and I'll show you how.</p>
+
+<p>In order to edit the blog I run Ghost v0.6.4 locally in <a href="https://nodejs.org/">node</a> v0.10.9 on my Windows machine.  On changing content/ theme or adding/ editing a post I use <a href="https://github.com/leftofnull/buster.git">Buster</a> to transpile the dynamic content from the running <a href="https://ghost.org/">Ghost</a> instance in to interim static html pages.  I then run some post-processing steps with <a href="http://gulpjs.com/">Gulp</a> to produce the final version of the static html and assets (css, js, images etc.).  Finally I push those contents up to my <a href="https://github.com/markstownsend/markstownsend.github.io">GitHub</a> repo.</p>
+
+<p>I've taken the additional step of having my own custom url so I paid for the registration (USD14) and I pay monthly for the DNS using <a href="https://dnsimple.com">DNSimple</a> which is USD0.80 on a maxed out (10 domains for USD8 per month) legacy Silver plan.  So it's not quite <strong>free</strong> but 80 cents a month for a blog takes some beating!</p>
+
+<p>If you are going to take this route to host your blog then the following two links are invaluable and Alexander Kahoun is a legend.</p>
+
+<ol>
+<li><a href="http://leftofnull.com/2014/02/07/using-github-pages-with-ghost-and-buster-on-windows-part-1/index.html">Using GitHub Pages with Ghost and Buster on Windows (part 1)</a>  </li>
+<li><a href="http://leftofnull.com/2014/02/24/using-github-pages-with-ghost-and-buster-on-windows-part-2/">Using GitHub Pages with Ghost and Buster on Windows (part 2)</a></li>
+</ol>
+
+<p>My own modest contribution to the process can be found in the README on my <a href="https://github.com/markstownsend/ghost-builder">ghost-builder repo</a> which you are welcome to have.  Please star it if it helps you.</p>
+
+<p>It's further worth understanding the limitations of <a href="https://github.com/">Github</a> pages for hosting and why it's necessary to take all these steps.  Fundamentally <a href="https://pages.github.com/">Github Pages</a> will only serve static content.  That means only exactly the files hosted on the server.  It will not serve content from an app like <a href="https://ghost.org/">Ghost</a>.  That's why you aren't hosting <a href="https://ghost.org/">Ghost</a> on <a href="https://github.com/">Github</a> but rather the output from the <a href="https://ghost.org/">Ghost</a> application running on your local machine.  You are using <a href="https://ghost.org/">Ghost</a> because it is a beautiful way to blog and it is fully featured running locally.  But you could conceivably use another blogging platform and do the same sort of process to get it to emit static content which you then push in to your <a href="https://github.com/markstownsend">Github repo</a> to display using <a href="https://pages.github.com/">Github Pages</a>.  Phew!  Get it?  If not put a comment below and I'll try to help you out.  </p>
+
+<p>Have fun!</p>
+    		</section>
+    		<footer class="post-footer">
+    			<div itemscope itemprop="author" itemtype="http://schema.org/Person" class="post-author">
+	                	<img itemprop="image" src="http://www.gravatar.com/avatar/dcdd9078ca819e49a4c26fed702a440e?s=250&amp;d=mm&amp;r=x" alt="Mark Townsend" class="post-author-avatar">
+					<div class="post-author-info">
+		              	<span itemprop="name">Mark Townsend</span>
+	              	</div>
+    			</div>
+    		</footer>
+		</article>
+		
+		<section itemprop="comment" class="post-comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+    var disqus_shortname = 'markstownsend'; // required: replace example with your forum shortname
+    var disqus_identifier = '5';
+ 
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>	</section>
+
+	<footer class="footer" role="contentinfo">
+	<div class="social-links-line"></div>
+	<section class="social-links">
+        <div class="social-links-inner">
+        	
+<a class="icon icon-twitter" href="https://twitter.com/markstownsend" target="_blank">				
+	<i class="fa fa-twitter"></i>
+</a>
+
+<a class="icon icon-facebook" href="https://www.facebook.com/mark.townsend.16" target="_blank">
+	<i class="fa fa-facebook"></i>
+</a>
+
+<a class="icon icon-google-plus" href="https://plus.google.com/105427612349076242854/posts" target="_blank">
+	<i class="fa fa-google-plus"></i>
+</a>
+
+<a class="icon icon-github" href="https://github.com/markstownsend" target="_blank">
+	<i class="fa fa-github"></i>
+</a>
+
+<a class="icon icon-medium" href="https://medium.com/@markstownsend" target="_blank">
+	<i class="fa fa-medium"></i>
+</a>
+
+<a class="icon icon-linkedin" href="https://uk.linkedin.com/in/markstownsend" target="_blank">
+	<i class="fa fa-linkedin"></i>
+</a>
+        </div>               
+    </section>
+</footer></main>
+
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="/assets/js/main.min.js"></script>
+</body>
+</html>>
+</body>
+</html>
