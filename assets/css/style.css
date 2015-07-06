@@ -508,6 +508,10 @@ BODY{margin:3% 2%;background:#fff}
 .header .blog-title{display:inline-block;margin:0 0 15px;padding:20px 15px 20px 25px;border:4px solid #FFFFFF;color:#FFFFFF;text-transform:uppercase;letter-spacing:5px;font-weight:normal;font-size:12px;line-height:1}
 .header .blog-description{font-size:10px;line-height:1}
 }
+.sharing UL{list-style-type:none;margin:0;padding:0;}
+.sharing LI{display:inline;}
+.sharing DIV{float:right;}
+.sharing-buttons{margin-top:-22px;}
 #nprogress .bar{background:#ABAB9F;position:fixed;z-index:100;top:0;left:0;width:100%;height:3px}
 .darkbox{position:fixed;top:0;left:0;z-index:999;display:none;overflow:hidden;width:100%;height:100%}
 .darkbox .darkbox-shadow{position:absolute;top:0;left:0;width:100%;height:100%;background:#000}
