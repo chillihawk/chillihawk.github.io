@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Greedy formulas and layout errors, the case for a novice mode in Excel</title>	
+
+	<meta name="description" content="">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="shortcut icon" href="/assets/images/favicon.ico"/>
+    <link rel="stylesheet" href="/assets/css/style.css"/>
+
+    <link rel="canonical" href="index.html" />
+    
+    <meta property="og:site_name" content="Technology-on-Sea" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Greedy formulas and layout errors, the case for a novice mode in Excel" />
+    <meta property="og:description" content="What you are looking at is an Excel 2013 worksheet containing a VLOOKUP formula written slightly incorrectly, giving completely the wrong result.  What you can also see is Excel giving two indications that something might be wrong.  However if you..." />
+    <meta property="og:url" content="/greedy-formulas-and-layout-errors-the-case-for-a-novice-mode-in-excel/" />
+    <meta property="article:published_time" content="2015-07-07T19:42:00.000Z" />
+    <meta property="article:modified_time" content="2015-07-08T12:29:49.450Z" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Greedy formulas and layout errors, the case for a novice mode in Excel" />
+    <meta name="twitter:description" content="What you are looking at is an Excel 2013 worksheet containing a VLOOKUP formula written slightly incorrectly, giving completely the wrong result.  What you can also see is Excel giving two indications that something might be wrong.  However if you..." />
+    <meta name="twitter:url" content="/greedy-formulas-and-layout-errors-the-case-for-a-novice-mode-in-excel/" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "Technology-on-Sea",
+    "author": {
+        "@type": "Person",
+        "name": "Mark Townsend",
+        "image": "//www.gravatar.com/avatar/dcdd9078ca819e49a4c26fed702a440e?s=250&d=mm&r=x",
+        "url": "/author/markstownsend",
+        "sameAs": null,
+        "description": "My background is .NET on  the service side but I'm getting in to mobile and cloud in a big way.  I like quality and teaching.  Out of work I like family, red wine, coffee, skiing and running."
+    },
+    "headline": "Greedy formulas and layout errors, the case for a novice mode in Excel",
+    "url": "/greedy-formulas-and-layout-errors-the-case-for-a-novice-mode-in-excel/",
+    "datePublished": "2015-07-07T19:42:00.000Z",
+    "dateModified": "2015-07-08T12:29:49.450Z",
+    "description": "What you are looking at is an Excel 2013 worksheet containing a VLOOKUP formula written slightly incorrectly, giving completely the wrong result.  What you can also see is Excel giving two indications that something might be wrong.  However if you..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.6" />
+    <link rel="alternate" type="application/rss+xml" title="Technology-on-Sea" href="../rss/index.html" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-64603532-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- Place this tag in your head or just before your close body tag. -->
+<script src="https://apis.google.com/js/platform.js" async defer>
+  {lang: 'en-GB'}
+</script>	
+</head>
+<body class="post-template">
+	
+<main id="container" role="main">
+	<header class="header" role="banner" style="background-image: url(/assets/images/tos_banner.jpg);">
+	<h1 class="blog-title">
+		<a href="../index.html">Technology-on-Sea</a>
+	</h1>
+	<div class="blog-description">Thoughts about technology from the South Coast.</div>
+</header>
+	<nav class="menu" role="navigation">
+	<a href="../index.html">Home</a>
+	<span class="delimiter">&#8226;</span>
+	<a href="../about/index.html">About</a>
+</nav>
+	<section class="post-full">
+		<article itemscope itemtype="http://schema.org/BlogPosting" role="article" class="post">
+			<header class="post-header">        		
+    			<h2 itemprop="name headline" class="post-title">
+    				<a href="index.html" itemprop="url">Greedy formulas and layout errors, the case for a novice mode in Excel.</a>
+    			</h2>
+    			<div class="post-meta">
+        			<time datetime="2015-07-07" itemprop="datePublished">July 07, 2015</time>
+        		</div>
+        		<hr>
+    		</header>
+    		<section itemprop="articleBody" class="post-content">
+    			<p><img src="../assets/images/errorcheckonvlookup1-1.JPG" alt="" />
+What you are looking at is an Excel 2013 worksheet containing a VLOOKUP formula written <em>slightly</em> incorrectly, giving <strong><em>completely</em></strong> the wrong result.  What you can also see is Excel giving two indications that something might be wrong.  However if you put "background error check excel" in to Google you will find as many links telling you how to <strong>turn it off</strong> as how to use it properly.<sup id="fnref:1"><a href="index.html#fn:1" rel="footnote">1</a></sup>  As I'll demonstrate, using it to trap this particular error scenario is not straightforward. If you'd like to follow along the code is in the 2013 folder in my <a href="https://github.com/markstownsend/excel-badpractice">Github repo</a>.  Please star it if it helps you.</p>
+
+<p>I've spent a lot of time over the last several years in big corporates teaching people how to use Excel.  In that time I've seen plenty of VLOOKUPs that have been entered like this.  What's more I've heard the use of this particular formula syntax (with the second argument - the range to perform the look up in - specified as columns, this is the <strong>greedy</strong> in the blog title, and the deliberate absence of the final argument) advocated at a peer to peer level, in other words, colleagues learning from their colleagues.  </p>
+
+<p>In the rest of this post I'll examine what's going wrong, how Excel is trying to tell us and where that explanation requires some intuitive leaps which are most likely beyond the understanding of novice spreadsheet users.</p>
+
+<hr />
+
+<p>The following image is the function wizard dialogue for the particular formula in question and I draw your attention to the elements I've labelled 1 and 2.</p>
+
+<p><img src="../assets/images/functionwizarddialogueonvlookup1.jpg" alt="Function Wizard" /></p>
+
+<ol>
+<li><p>The obliquely named <strong>Table<em>_</em>array</strong> is the range, in the leftmost column of which you will attempt to match your <strong>Lookup<em>_</em>value</strong>.  Now this is a legitimate range, (it's all of column B, C, D and E), but in the case of this workbook there is data further down in those columns, out of sight (this is the <strong>layout error</strong> in the blog title, there are 1,048,576 rows after all), impacting the result.  The justification I've heard for using the range <code>B:E</code> rather than <code>$B$3:$E$6</code> is because it is quicker to select and because using that syntax you won't miss any data or have to update your formula should more rows be added to the <strong>Table<em>_</em>array</strong>.  Well, given a preference for use of the mouse over the keyboard, not uncommon in novice users, then I agree it probably is quicker to select.  And you certainly won't miss any data but the danger is you will include data that you didn't intend to be included.  Finally there are better ways to have a formula that will automatically update when new rows are added, <a href="https://support.office.com/en-za/article/Create-an-Excel-table-in-a-worksheet-e81aa349-b006-4f8a-9806-5af9df0ac664">Tables</a> come to mind immediately.</p></li>
+<li><p>The <em>even more</em> obliquely named Range_lookup is displayed in standard font (as opposed to bold), indicating that it is optional.  It hasn't been entered and the behaviour is as expected<sup id="fnref:2"><a href="index.html#fn:2" rel="footnote">2</a></sup>, an approximate match.  Now the justification I've heard for this is, circularly: <em>'it's optional, you don't need to enter it'</em>.  I don't want to examine approximate matching on text values, I want to simply say that it is the edge case.  I use and teach the heuristic that when matching text values this final argument should <strong>always</strong> be specified as <code>FALSE</code> indicating an exact match is required.  That's the case in the example under discussion here.  </p></li>
+</ol>
+
+<p>So in summary, my experience and expertise tells me that the final argument is wrong for matching on text values and the second argument should be more parsimoniously stated.  But what does the error checking say? <br />
+<img src="../assets/images/errorcheckmessage1.jpg" alt="" />
+Quite honestly, that doesn't seem like a big deal to me.  I've also run the INQUIRE workbook analysis on this book and in the report the following information is presented.  I've drawn out the salient points for you because frankly, it isn't obvious. <br />
+<img src="../assets/images/worksheetanalysisonvlookup1.jpg" alt="" />
+Once again we're referencing blank cells.  Once again, no big deal.  We also have a formula referencing text cells.  Well that's what we wanted we're matching on the widget name after all so, no big deal.  Granted, 384 blank referenced cells jumps off the page a bit but that's just stating the first point the other way round so, no big deal.  But, the error is egregious!  We're reporting the revenue for the full year 2014 sales of Widget A instead of the part year 2015 sales.  Where is the warning:<h1>Danger, Will Robinson!</h1>  </p>
+
+<p>Instead it's a meeker:  </p>
+
+<h5>Danger?  Will Robinson.</h5>
+
+<p>Taking the text 'error' first and drilling in to the appropriate sheet <code>[Text Cell Refs]</code> on the analysis workbook we should interpret it like this: the formula is a lookup and it is working on cells containing text.  We have to link that in our mental Excel heuristics dictionary to the rule of thumb: <strong>matching on text values must be exact</strong>.  Having made that association then we know we must make a correction to the formula at least as follows, from <code>=VLOOKUP(I3,B:E,4)</code> to <code>=VLOOKUP(I3,B:E,4,FALSE)</code>. Now, this will be enough to fix the error but let's continue.</p>
+
+<p>Taking the two blank 'errors' next and drilling in to the appropriate sheets <code>[Blank Cell Refs]</code> and <code>[Blank Referenced Cells]</code>on the analysis workbook we should interpret it like this:  the formula is a lookup and it is looking up in a range that contains blank cells.  Now in and of itself that is not a problem for a lookup formula but neither is it necessarily an advantage.  At this point we should consult our mental Excel heuristics dictionary for the rule of thumb: <strong>parsimony over greed</strong> when consuming arguments in a function.  If we're not swayed by this we should, at a minimum, traverse the entirety of the left-most column (<code>B</code>)<sup id="fnref:3"><a href="index.html#fn:3" rel="footnote">3</a></sup> of the referenced range (that's the column where the lookup is being matched) and in doing so we would discover the data for 2014.  We could then move the 2014 data somewhere else but instead we will make a correction to the formula at least as follows, from <code>=VLOOKUP(I3,B:E,4)</code> to <code>=VLOOKUP(I3,B3:E6,4)</code>.  That will also be enough to fix the error.</p>
+
+<p>Finally we should make both corrections so the formula becomes <code>=VLOOKUP(I3,B3:E6,4,FALSE)</code> or better yet <code>=VLOOKUP(I3,$B$3:$E$6,4,FALSE)</code>.</p>
+
+<hr />
+
+<p>I think you'll agree that none of that was particularly obvious.  That's because that use of the formula is not wrong, <em>per se</em>, it's only ill-advised.  Therefore it's difficult to catch it.  Were there a syntax error Excel might catch it as a <code>#REF!</code> or it might pop up a warning and prevent the formula from being calculated.  But it can't tell you this is outright wrong because it's not.  But it is!</p>
+
+<p>In order to address this, in my opinion, Excel should have a novice mode.  I will expand on this in future blog posts but for the time being and as a result of this investigation, that novice mode should have the following functionality:</p>
+
+<ul>
+<li>forbid optional arguments in vlookup (at least, I'll look in to whether this could be extended to all built in functions or a popular subset)</li>
+<li>forbid raw grid references and only permit the use of tables (which are a very useful abstraction layer over the grid).</li>
+</ul>
+
+<p>I know I'm not the only one with a view on the Excel flexibility vs control debate.  So I'd very much appreciate any comments you would like to share on the idea of a novice mode. In the near future I'll write some more posts further examining this.</p>
+
+<p>Have fun!</p>
+
+<hr />
+
+<p>Footnotes:  </p>
+
+<div class="footnotes"><ol><li class="footnote" id="fn:1"><p>I'm aware how unscientific this statement is given the tailored search results from Google nevertheless the point that there are a lot of links advising how to disable error checking is valid.  <a href="https://www.google.com/#q=background+error+check+excel">Try it for yourself</a> and see what you get. <a href="index.html#fnref:1" title="return to article">↩</a></p></li>
+<li class="footnote" id="fn:2"><p>As an aside I think there is a case to be made for an apparent inconsistency in not entering the final argument.  Spot the subtle difference in the formulas below but the big difference in the formula result.  I'll follow up on this in a future post.<img src="../assets/images/optionalfinalargumentinvlookup1.jpg" alt="" title="" /> <a href="index.html#fnref:2" title="return to article">↩</a></p></li>
+<li class="footnote" id="fn:3"><p>Use the key combination CTRL + DOWN ARROW to quickly skip from data region to data region.   <a href="index.html#fnref:3" title="return to article">↩</a></p></li></ol></div>
+    		</section>
+			<section class="sharing">
+				<div class="sharing-buttons">
+					<ul>
+						<li><!-- Place this tag where you want the share button to render. --><div class="g-plus" data-action="share" data-annotation="none"></div></li><!-- google plus -->
+						<li><a href="https://twitter.com/share" class="twitter-share-button" data-via="markstownsend" data-count="none">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></li><!-- twitter -->
+						<li><script src="http://platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script><script type="IN/Share"></script></li><!-- linkedin -->
+					</ul>
+				</div>
+			</section>
+    		<footer class="post-footer">
+    			<div itemscope itemprop="author" itemtype="http://schema.org/Person" class="post-author">
+	                	<img itemprop="image" src="http://www.gravatar.com/avatar/dcdd9078ca819e49a4c26fed702a440e?s=250&amp;d=mm&amp;r=x" alt="Mark Townsend" class="post-author-avatar">
+					<div class="post-author-info">
+		              	<span itemprop="name">Mark Townsend</span>
+		              	<p itemprop="description" class="post-author-bio">My background is .NET on  the service side but I&#x27;m getting in to mobile and cloud in a big way.  I like quality and teaching.  Out of work I like family, red wine, coffee, skiing and running.</p>
+	              	</div>
+    			</div>
+    		</footer>
+		</article>
+		
+		<section itemprop="comment" class="post-comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+    var disqus_shortname = 'markstownsend'; // required: replace example with your forum shortname
+    var disqus_identifier = '6';
+ 
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>	</section>
+
+	<footer class="footer" role="contentinfo">
+	<div class="social-links-line"></div>
+	<section class="social-links">
+        <div class="social-links-inner">
+        	
+<a class="icon icon-twitter" href="https://twitter.com/markstownsend" target="_blank">				
+	<i class="fa fa-twitter"></i>
+</a>
+
+<a class="icon icon-facebook" href="https://www.facebook.com/mark.townsend.16" target="_blank">
+	<i class="fa fa-facebook"></i>
+</a>
+
+<a class="icon icon-google-plus" href="https://plus.google.com/105427612349076242854/posts" target="_blank">
+	<i class="fa fa-google-plus"></i>
+</a>
+
+<a class="icon icon-github" href="https://github.com/markstownsend" target="_blank">
+	<i class="fa fa-github"></i>
+</a>
+
+<a class="icon icon-medium" href="https://medium.com/@markstownsend" target="_blank">
+	<i class="fa fa-medium"></i>
+</a>
+
+<a class="icon icon-linkedin" href="https://uk.linkedin.com/in/markstownsend" target="_blank">
+	<i class="fa fa-linkedin"></i>
+</a>
+        </div>               
+    </section>
+</footer></main>
+
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="/assets/js/main.min.js"></script>
+</body>
+</html>
