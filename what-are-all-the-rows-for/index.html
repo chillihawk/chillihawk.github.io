@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>What are all the rows for in Excel? FUSE with F#, nodejs, CouchDB, R.</title>	
+
+	<meta name="description" content="">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="shortcut icon" href="/assets/images/favicon.ico"/>
+    <link rel="stylesheet" href="/assets/css/style.css"/>
+
+    <link rel="canonical" href="index.html" />
+    
+    <meta property="og:site_name" content="Technology-on-Sea" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="What are all the rows for in Excel? FUSE with F#, nodejs, CouchDB, R." />
+    <meta property="og:description" content="A look at the FUSE corpus using F#, nodejs, CouchDB and R.  Part 1 of n. Most spreadsheet researchers are familiar with the EUSES Corpus (4498 spreadsheets).  More recently (thanks to Felienne Hermans and Emerson Murphy-Hill), the Enron Corpus (15,..." />
+    <meta property="og:url" content="/what-are-all-the-rows-for/" />
+    <meta property="article:published_time" content="2015-08-19T15:38:53.596Z" />
+    <meta property="article:modified_time" content="2015-08-27T07:32:35.939Z" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="What are all the rows for in Excel? FUSE with F#, nodejs, CouchDB, R." />
+    <meta name="twitter:description" content="A look at the FUSE corpus using F#, nodejs, CouchDB and R.  Part 1 of n. Most spreadsheet researchers are familiar with the EUSES Corpus (4498 spreadsheets).  More recently (thanks to Felienne Hermans and Emerson Murphy-Hill), the Enron Corpus (15,..." />
+    <meta name="twitter:url" content="/what-are-all-the-rows-for/" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "Technology-on-Sea",
+    "author": {
+        "@type": "Person",
+        "name": "Mark Townsend",
+        "image": "//www.gravatar.com/avatar/dcdd9078ca819e49a4c26fed702a440e?s=250&d=mm&r=x",
+        "url": "/author/markstownsend",
+        "sameAs": null,
+        "description": "My background is .NET on  the service side but I'm getting in to mobile and cloud in a big way.  I like quality and teaching.  Out of work I like family, red wine, coffee, skiing and running."
+    },
+    "headline": "What are all the rows for in Excel? FUSE with F#, nodejs, CouchDB, R.",
+    "url": "/what-are-all-the-rows-for/",
+    "datePublished": "2015-08-19T15:38:53.596Z",
+    "dateModified": "2015-08-27T07:32:35.939Z",
+    "description": "A look at the FUSE corpus using F#, nodejs, CouchDB and R.  Part 1 of n. Most spreadsheet researchers are familiar with the EUSES Corpus (4498 spreadsheets).  More recently (thanks to Felienne Hermans and Emerson Murphy-Hill), the Enron Corpus (15,..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.6" />
+    <link rel="alternate" type="application/rss+xml" title="Technology-on-Sea" href="../rss/index.html" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-64603532-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- Place this tag in your head or just before your close body tag. -->
+<script src="https://apis.google.com/js/platform.js" async defer>
+  {lang: 'en-GB'}
+</script>	
+</head>
+<body class="post-template">
+	
+<main id="container" role="main">
+	<header class="header" role="banner" style="background-image: url(/assets/images/tos_banner.jpg);">
+	<h1 class="blog-title">
+		<a href="../index.html">Technology-on-Sea</a>
+	</h1>
+	<div class="blog-description">Thoughts about technology from the South Coast.</div>
+</header>
+	<nav class="menu" role="navigation">
+	<a href="../index.html">Home</a>
+	<span class="delimiter">&#8226;</span>
+	<a href="../about/index.html">About</a>
+</nav>
+	<section class="post-full">
+		<article itemscope itemtype="http://schema.org/BlogPosting" role="article" class="post">
+			<header class="post-header">        		
+    			<h2 itemprop="name headline" class="post-title">
+    				<a href="index.html" itemprop="url">What are all the rows for in Excel?</a>
+    			</h2>
+    			<div class="post-meta">
+        			<time datetime="2015-08-19" itemprop="datePublished">August 19, 2015</time>
+        		</div>
+        		<hr>
+    		</header>
+    		<section itemprop="articleBody" class="post-content">
+    			<h3 id="alookatthefusecorpususingfnodejscouchdbandrpart1ofn">A look at the FUSE corpus using F#, nodejs, CouchDB and R.  Part 1 of n.</h3>
+
+<p>Most spreadsheet researchers are familiar with the <a href="http://openscience.us/repo/spreadsheet/euses.html">EUSES Corpus</a><sup id="fnref:1"><a href="index.html#fn:1" rel="footnote">1</a></sup> (4498 spreadsheets).  More recently (thanks to <a href="http://bit.ly/1NAOrK2">Felienne Hermans</a> and <a href="https://people.engr.ncsu.edu/ermurph3/">Emerson Murphy-Hill</a>), the <a href="http://figshare.com/articles/Enron_Spreadsheets_and_Emails/1221767">Enron Corpus</a><sup id="fnref:2"><a href="index.html#fn:2" rel="footnote">2</a></sup> (15,770 spreadsheets), came to the attention of the wider community.  More recently still, the <a href="http://static.barik.net/fuse/">FUSE corpus</a><sup id="fnref:3"><a href="index.html#fn:3" rel="footnote">3</a></sup>, has made some 249,376 spreadsheets available to everyone.  So, I decided to have a look at the use of the grid across all these workbooks.  </p>
+
+<hr />
+
+<h4 id="summary">Summary.</h4>
+
+<p>The process I followed succeeded in analysing nearly 95% of the spreadsheets in the corpus.  The scatter plots below show the last row and last column produced by the analysis for each of the 236,226 workbooks I was able to analyse completely.  </p>
+
+<p><img src="../assets/images/small_xy_log.jpg" alt="pre 2007 last row vs last col, log scale" />
+<img src="../assets/images/big_xy_log.jpg" alt="2007-2013 last row vs last col, log scale" /></p>
+
+<p>The analysis shows concentration of use of the grid is overwhelmingly in the upper left corner (in other words R1C1).  This is borne out by the summary statistics as well. <br />
+<img src="../assets/images/summarystatistics.jpg" alt="" /></p>
+
+<p>The workbooks break down as follows:</p>
+
+<p><img src="../assets/images/summarynumbers.jpg" alt="" /></p>
+
+<p>Once extreme workbooks are removed, distinguishing between pre-2007 sheets and the rest shows that generally Excel users are not taking advantage of the extra 983,040 rows nor extra 16,128 columns<sup id="fnref:4"><a href="index.html#fn:4" rel="footnote">4</a></sup>.  In fact while there has been a more than thousand fold increase in the number of available cells there has only be an approximate doubling in the total number of cells used.   </p>
+
+<p>Even including the extreme workbooks the average Excel 2007-2013 workbook in the analysis uses just less than 0.01% of the grid.  Looking at it another way, based on 0.01% occupancy rate, if Excel was Las Vegas, there'd only be 15 people staying tonight<sup id="fnref:5"><a href="index.html#fn:5" rel="footnote">5</a></sup>.  </p>
+
+<hr />
+
+<p>As practicioners, we know this is true from our own experience.  We even advise and prefer parsimonious and organised use of the grid because it generally aids understanding of the workbook.  Using the grid for persisting data is contrary to best practice and no higher level function in Excel (non-trivial calculation, pivot, chart, print) involving that many (heterogenous) cells could be sufficiently performant (on a desktop machine) or even be guaranteed to work.  So, from the point of view of best practice it's a good thing that, on the whole, users aren't filling the grid.  </p>
+
+<p><strong>So why are all the rows there?</strong>  </p>
+
+<p>They are there for the edge case.  So that regardless of the size of your data, the grid will not hinder you.  In my view however it hinders the beginner.  Any piece of data can go in an effectively limitless number of locations.  When teaching I very commonly come across the question: <em>'where should I put 'X''</em>.  The extent of the grid demands organisation.  The extent of the grid permits effectively unbounded expansion of a model.  How many novice users arrange their spreadsheets in such a way that they can cope with the flexibility the grid permits?  Of course, the answer is, very few.  </p>
+
+<p>This highlights how important it is to have a methodology when developing/ using spreadsheets.  If you are in the financial sector, traditionally heavy users of Excel, then there are a number of organisations like <a href="http://bit.ly/1K0lrLc">Operis</a>, <a href="http://bit.ly/1Jv98zZ">Corality</a> and <a href="http://bit.ly/1MT74Jd">F1F9</a> who offer training and even valuable free advice on best practice use of Excel.  But there is nothing to stop you or your organisation developing your own methodology, especially if a 'balance sheet style' doesn't suit your domain.  It can start simply with something like: <em>every cell with a number must be accompanied by a row header or column header explicitly stating the units of measure</em>, and evolve from there.  <strong>Getting a consistent approach to spreadsheet development/ use across your organisation will be worth the effort.</strong></p>
+
+<p>Separately, I've written other posts about a <a href="http://bit.ly/xlnovice">novice mode</a> in Excel and I'd like to add to that in this post.  I think the novice mode should include the following:</p>
+
+<ul>
+<li>grey out anything below and to the right of the viewport (anchored at cell A1), to discourage (but not prevent) putting data there</li>
+<li><em>'garbage collect'</em> (recursively) the furthest unused cells below and to the right of the viewport.  Garbage collection would mean if a cell contains no data, no formulas, is not part of a named range and is not in a print area then it should be greyed out and excluded from the <code>Worksheet.UsedRange</code>.  The used range must always be rectangular however, a jagged range is not permitted.</li>
+</ul>
+
+<p>I plan to continue analysis of the FUSE corpus with a focus on identifying aspects of spreadsheet use that could be improved to make life easier for Excel beginners.  So expect more posts on the idea of a novice mode and ways in which constraining the product can actually make it easier to use for most people.  I'd really appreciate any comments you'd like to share.</p>
+
+<p>The remainder of this post outlines the steps I took to perform the analysis.</p>
+
+<hr />
+
+<h4 id="method">Method</h4>
+
+<p>If you'd like to follow along with the method, I am referencing the information in this link: <a href="http://static.barik.net/fuse/">static.barik.net/fuse/</a>.</p>
+
+<p>This analysis was performed on the current Fuse set which at the time of writing was 249,376 binaries extracted from the Common Crawl files from Winter 2013 through December 2014.  Fuse is a dynamic archive hence why I'm recording this fact.  </p>
+
+<p>236,226 workbooks were successfully analyzed.   In order to perform this analysis I took the following steps:</p>
+
+<ul>
+<li>Downloaded the JSON metadata file (fuse-bin.analysis.dedup.poi-dec2014.json.gz)</li>
+<li>Decompressed the file with <a href="http://www.7-zip.org/">7-zip</a> and used <a href="https://nodejs.org/">nodejs</a> to read it into a <a href="http://couchdb.apache.org/">CouchDB</a> instance.  <a href="https://www.mongodb.org/">MongoDB</a> is suggested and commands are provided to load it in to a MongoDB instance but it's not my cup of tea.  CouchDB worked fine in any case, although because I was doing it on my laptop I had to split the file and batch the inserts to get it to work.</li>
+<li>FUSE does provide <a href="https://poi.apache.org/">POI</a> stats in the JSON, but a MapReduce on <code>doc.POI['countCOLUMNS']</code>, <code>doc.POI['countCOLUMN']</code>, <code>doc.POI['countROW']</code> and <code>doc.POI['countROWS']</code> seemed to show the majority of these counts at zero, so I decided to roll my own.</li>
+<li>Conveniently FUSE provides all 249,376 binaries and an index on their site so I downloaded the index file (fuse-all.sha1.sorted-dec2014.txt) and the archive (fuse-binaries-dec2014.tar.gz).</li>
+<li>Decompressed the archive using <a href="http://www.7-zip.org/">7-zip</a>.  It is 21.3GB fully expanded.</li>
+<li>I then iterated through the collection using F# and COM Interop to discover the last non-empty row and last non-empty column on each worksheet in each workbook.  Then per workbook I took the maximum last used row from all sheets in the book and separately the maximum last used column from all sheets to produce a blended maximum used range for the workbook.  In other words, using the example below, if the maximum used range in Sheet1 was A1:T10 and the maximum used range in Sheet2 was A1:E15 the workbook maximum used range was A1:T15.</li>
+</ul>
+
+<p><img src="../assets/images/workbookmaxrange-1.jpg" alt="How to choose the maximum used range" /></p>
+
+<div class="callout"><p>An aside here.  There are plenty of other technologies available to read spreadsheets and I looked at and dismissed the following: <a href="http://www.gemboxsoftware.com/spreadsheet/overview">Gembox</a> (because the free version only lets you read 150 rows per sheet and 5 sheets per workbook), <a href="http://fsprojects.github.io/ExcelProvider/">ExcelProvider</a> (because it looks at the file extension to determine whether to open a binary stream or an xml stream and the FUSE file names don't have file extensions), <a href="https://npoi.codeplex.com/">NPOI</a> (this is the .NET port of POI so it was appealing to use similar technology to the FUSE guys but I just didn't grok it immediately so maybe I'll come back to it) and <a href="https://exceldatareader.codeplex.com/">ExcelDataReader</a> (I did a partial implementation using this but there ended up being a lot of files it couldn't open, the crux of the issue being not having a good way to determine whether to open a binary stream - for xls - or an xml stream - for xlsx).  So I settled on Office.Interop.  Which, is not without its own issues - especially around tightly managing your RCW references (here's a good <a href="http://stackoverflow.com/questions/4591681/rcw-reference-counting-when-using-com-interop-in-c-sharp">stackoverflow post</a> on the subject) - but FUSE notes some 28,616 workbooks unreadable by their analysis tools as opposed to my 13,150.  Many of the COM errors came from password protected workbooks and the sudden death of the RPC server, which I couldn't get to the bottom of.  One further point worth noting is that COM introduces a dependency on Windows which restricts your VM options if you are pushing this analysis up into the cloud.  A definite next step for me so whether or not I continue with COM will remain to be seen.  
+</p></div>  
+
+<ul>
+<li>The technique I used for finding the last used column was:</li>
+</ul>
+
+<pre><code class="language-f#">let cellsColl = sheet.Cells  
+let firstCell = cellsColl.[1,1] :?&gt; Range  
+let mutable lastCell = cellsColl.[1,1] :?&gt; Range  
+let mutable lastCol = -1  
+try  
+  try
+    lastCell &lt;- cellsColl.Find("*", firstCell, Excel.XlFindLookIn.xlFormulas, Excel.XlLookAt.xlPart, Excel.XlSearchOrder.xlByColumns, Excel.XlSearchDirection.xlPrevious, Type.Missing, Type.Missing, Type.Missing)
+            if(not(obj.ReferenceEquals(lastCol, null))) then lastCol &lt;- lastCell.Column
+        with
+            | _ as ex -&gt; printfn "%s has thrown an error: %s" sheet.Name ex.Message
+finally  
+  // clean up com references    
+</code></pre>
+
+<p>Then change <code>Excel.XlSearchOrder</code> to <code>Excel.XlSearchOrder.xlByRows</code> to find the last used row.  I have assumed content in all sheets starts in cell A1 rather than attempt to resolve the upper left corner of the used range aswell as the bottom right.  I think this is a reasonable assumption.</p>
+
+<ul>
+<li>Having got the results I then used nodejs to update the JSON records in CouchDB.  Once again due to the resource constraints on my machine this operation needed to be batched.</li>
+<li>Finally I wrote another MapReduce to get the results back out in csv and loaded this content in to <a href="https://www.r-project.org/">R</a>.  </li>
+<li>I split the data in to pre and post Excel 2007 groups then produced the scatter plots for the last row vs the last column.  I used the same log scales for both pre and post Excel 2007 to highlight the similarity in the distributions.</li>
+</ul>
+
+<p>In terms of improving the method it's worth noting that COM is not fast.  It also introduces a dependency on Windows and Excel.  Also, the programming is just plain ugly.  To remove the need for COM a reliable method for determining whether the file is a binary file or xml file would need to be developed and then the ExcelDataReader could be used.  NPOI is also worth further investigation.  I will look at these two technologies next before pushing the analysis up in to the cloud. </p>
+
+<p>Please comment if you've got any questions I can help with.</p>
+
+<p>Have fun!</p>
+
+<hr />
+
+<h6 id="footnotes">Footnotes:</h6>
+
+<div class="footnotes"><ol><li class="footnote" id="fn:1"><p>Marc Fisher II and Gregg Rothermel. The EUSES Spreadsheet Corpus: A shared resource for supporting experimentation with spreadsheet dependability mechanisms. In Proceedings of the 1st Workshop on End-User Software Engineering, pages 47-51, St. Louis, MO, USA, May 2005 <a href="index.html#fnref:1" title="return to article">↩</a></p></li>
+<li class="footnote" id="fn:2"><p>Felienne Hermans and Emerson Murphy-Hill. Enron's Spreadsheets and Related Emails: A Dataset and Analysis.  37th International Conference on Software Engineering, ICSE 2015 <a href="index.html#fnref:2" title="return to article">↩</a></p></li>
+<li class="footnote" id="fn:3"><p>Titus Barik, Kevin Lubick, Justin Smith, John Slankas, and Emerson Murphy-Hill. "<a href="http://go.barik.net/msr2015">Fuse: A Reproducible, Extendable, Internet-scale Corpus of Spreadsheets</a>." In: Proceedings of the <a href="http://2015.msrconf.org/">12th Working Conference on Mining Software Repositories</a> (Data Showcase), Florence, Italy, 2015. <a href="index.html#fnref:3" title="return to article">↩</a></p></li>
+<li class="footnote" id="fn:4"><p>In section V of the FUSE paper a limitation of the Common Crawl which means it can only store binary files no greater than 1MB is highlighted so I'm aware that this analysis excludes really big Excel files and that they could conceivably skew the grid usage down and to the right.  But the paper goes on to state that such files only make up low single digit percentages in the other available corpora so my contention is that it wouldn't make a very big difference to this analysis.    <a href="index.html#fnref:4" title="return to article">↩</a></p></li>
+<li class="footnote" id="fn:5"><p>150,544 rooms as at 03/2015 according to the <a href="http://www.lvcva.com/includes/content/images/media/docs/2014-Vegas-FAQs.pdf">Las Vegas Convention and Visitor Authority</a> <a href="index.html#fnref:5" title="return to article">↩</a></p></li>
+<li class="footnote" id="fn:6"><p>An extreme workbook is defined as one where data is reported either in row  1,048,576 or column 16,384.  These are removed from the workbook summary only for the purpose of calculating the blended average cell usage.  They remain in the scatter plots and statistical analysis. <a href="index.html#fnref:6" title="return to article">↩</a></p></li></ol></div>
+    		</section>
+			<section class="sharing">
+				<div class="sharing-buttons">
+					<ul>
+						<li><!-- Place this tag where you want the share button to render. --><div class="g-plus" data-action="share" data-annotation="none"></div></li><!-- google plus -->
+						<li><a href="https://twitter.com/share" class="twitter-share-button" data-via="markstownsend" data-count="none">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></li><!-- twitter -->
+						<li><script src="http://platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script><script type="IN/Share"></script></li><!-- linkedin -->
+					</ul>
+				</div>
+			</section>
+    		<footer class="post-footer">
+    			<div itemscope itemprop="author" itemtype="http://schema.org/Person" class="post-author">
+	                	<img itemprop="image" src="http://www.gravatar.com/avatar/dcdd9078ca819e49a4c26fed702a440e?s=250&amp;d=mm&amp;r=x" alt="Mark Townsend" class="post-author-avatar">
+					<div class="post-author-info">
+		              	<span itemprop="name">Mark Townsend</span>
+		              	<p itemprop="description" class="post-author-bio">My background is .NET on  the service side but I&#x27;m getting in to mobile and cloud in a big way.  I like quality and teaching.  Out of work I like family, red wine, coffee, skiing and running.</p>
+	              	</div>
+    			</div>
+    		</footer>
+		</article>
+		
+		<section itemprop="comment" class="post-comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+    var disqus_shortname = 'markstownsend'; // required: replace example with your forum shortname
+    var disqus_identifier = '8';
+ 
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>	</section>
+
+	<footer class="footer" role="contentinfo">
+	<div class="social-links-line"></div>
+	<section class="social-links">
+        <div class="social-links-inner">
+        	
+<a class="icon icon-twitter" href="https://twitter.com/markstownsend" target="_blank">				
+	<i class="fa fa-twitter"></i>
+</a>
+
+<a class="icon icon-facebook" href="https://www.facebook.com/mark.townsend.16" target="_blank">
+	<i class="fa fa-facebook"></i>
+</a>
+
+<a class="icon icon-google-plus" href="https://plus.google.com/105427612349076242854/posts" target="_blank">
+	<i class="fa fa-google-plus"></i>
+</a>
+
+<a class="icon icon-github" href="https://github.com/markstownsend" target="_blank">
+	<i class="fa fa-github"></i>
+</a>
+
+<a class="icon icon-medium" href="https://medium.com/@markstownsend" target="_blank">
+	<i class="fa fa-medium"></i>
+</a>
+
+<a class="icon icon-linkedin" href="https://uk.linkedin.com/in/markstownsend" target="_blank">
+	<i class="fa fa-linkedin"></i>
+</a>
+        </div>               
+    </section>
+</footer></main>
+
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="/assets/js/main.min.js"></script>
+</body>
+</html>
