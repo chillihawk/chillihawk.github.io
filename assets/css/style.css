@@ -498,7 +498,7 @@ HR{width:200px;height:3px;border:none;background-color:#eaeaea}
 .social-links-line{height:3px;background-color:#ccc}
 .social-links{margin-top:-15px;text-align:center}
 .social-links .social-links-inner{display:inline-block;padding:0 15px;background:#FFFFFF}
-.callout{padding:10px 10px 10px 10px; background-color:#CCFF66;font-family:arial;text-align:left;font-size:9px;border:1px solid black}
+.callout{padding:10px 10px 10px 10px; background-color:#CCFF66;font-family:sans-serif;text-align:left;font-size:8px;border:1px solid black}
 @media screen and (max-width: 960px){
 BODY{margin:3% 2%;background:#fff}
 #container{margin:0 auto;padding:0;width:98%;background-color:#fff}
